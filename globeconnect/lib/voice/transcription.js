@@ -1,22 +1,25 @@
-var Transcription = function(id) {
+var Transcription = function (id) {
     var obj = {};
 
     this.id = id;
 
-    this.setUrl = function(url) {
+    this.setUrl = function (url) {
         obj.url = url;
         return this;
     };
 
-    this.getObject = function() {
-        if(typeof this.url == 'undefined') {
-            throw new Error('Url is reqiored');
+    this.getObject = function () {
+        if (typeof this.url === 'undefined') {
+            throw new Error('Url is required');
         }
 
         obj.id = this.id;
-        for(var key in obj) {
-            if(typeof obj[key] == 'object' && typeof obj[key].getObject == 'function') {
-                obj[key] = obj[key].getObject()
+        for (var key in obj) {
+            if (
+                typeof obj[key] === 'object' &&
+                typeof obj[key].getObject === 'function'
+            ) {
+                obj[key] = obj[key].getObject();
             }
         }
 
@@ -24,6 +27,6 @@ var Transcription = function(id) {
     };
 };
 
-module.exports = function(id) {
+module.exports = function (id) {
     return new Wait(id);
-}
+};

@@ -1,75 +1,78 @@
-var Call = function(to) {
+var Call = function (to) {
     var obj = {};
 
     this.to = to;
 
-    this.setName = function(name) {
+    this.setName = function (name) {
         obj.name = name;
         return this;
-    }
+    };
 
-    this.setAnswerToMedia = function(ansMedia) {
+    this.setAnswerToMedia = function (ansMedia) {
         obj.answerToMedia = ansMedia;
         return this;
     };
 
-    this.setChannel = function(channel) {
+    this.setChannel = function (channel) {
         obj.channel = channel;
         return this;
     };
 
-    this.from = function(from) {
-        obj.from = from; 
+    this.from = function (from) {
+        obj.from = from;
         return this;
     };
 
-    this.setHeaders = function(headers) {
-        obj.headers = header;
+    this.setHeaders = function (headers) {
+        obj.headers = headers;
         return this;
     };
 
-    this.setRecording = function(recodring) {
+    this.setRecording = function (recording) {
         obj.recording = recording;
         return this;
     };
 
-    this.required = function(required) {
+    this.required = function (required) {
         obj.required = required;
         return this;
     };
 
-    this.setTimeout = function(timeout) {
+    this.setTimeout = function (timeout) {
         obj.timeout = timeout;
         return this;
     };
 
-    this.allSignals = function(signal) {
+    this.allSignals = function (signal) {
         obj.allowSignals = signal;
         return this;
     };
 
-    this.setMachineDetection = function(mDetection) {
+    this.setMachineDetection = function (mDetection) {
         obj.machineDetection = mDetection;
         return this;
     };
 
-    this.getObject = function() {
-        if(typeof this.to == 'undefined') {
+    this.getObject = function () {
+        if (typeof this.to === 'undefined') {
             throw new Error('to is required');
         }
 
         obj.to = this.to;
 
-        for(var key in obj) {
-            if(typeof obj[key] == 'object' && typeof obj[key].getObject == 'function') {
-                obj[key] = obj[key].getObject()
+        for (var key in obj) {
+            if (
+                typeof obj[key] === 'object' &&
+                typeof obj[key].getObject === 'function'
+            ) {
+                obj[key] = obj[key].getObject();
             }
         }
 
         return obj;
     };
 
-    rmNull = function(key, value) {
+    rmNull = function (key, value) {
         if (value === null) {
             return undefined;
         }
@@ -80,6 +83,6 @@ var Call = function(to) {
     return this;
 };
 
-module.exports = function(to) {
+module.exports = function (to) {
     return new Call(to);
-}
+};

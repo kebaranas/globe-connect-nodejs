@@ -1,27 +1,27 @@
-var Session = function(json) {
+var Session = function (json) {
     var obj = {};
 
     this.json = json;
 
-    this.getObject = function() {
-        if(typeof this.json.session == 'undefined') {
+    this.getObject = function () {
+        if (typeof this.json.session === 'undefined') {
             throw new Error('Invalid json data');
         }
 
-        for(key in this.json.session) {
+        for (var key in this.json.session) {
             obj[key] = this.json.session[key];
         }
 
-        obj.to;
-        obj.from;
-        obj.headers;
-        obj.parameters;
+        obj.to = to;
+        obj.from = from;
+        obj.headers = headers;
+        obj.parameters = parameters;
 
         return obj;
-    }
+    };
 
 };
 
-module.exports = function(json) {
+module.exports = function (json) {
     return new Session(json);
-}
+};

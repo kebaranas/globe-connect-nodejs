@@ -1,98 +1,103 @@
-var Ask = function(say) {
+var Ask = function (say) {
     var obj = {};
     this.say = say;
 
-    this.setChoices = function(choices) {
+    this.setChoices = function (choices) {
         this.choices = choices;
         return this;
     };
 
-    this.setMaxAttempt = function(attempt) {
+    this.setMaxAttempt = function (attempt) {
         obj.attempt = attempt;
         return this;
     };
 
-    this.setBargein = function(bargein) {
-        obj.bargein = bargein;
+    this.setBargain = function (bargain) {
+        obj.bargain = bargain;
         return this;
-    }
+    };
 
-    this.setMinConfidence = function(confidence) {
+    this.setMinConfidence = function (confidence) {
         obj.confidence = confidence;
         return this;
     };
 
-    this.setName = function(name) {
+    this.setName = function (name) {
         obj.name = name;
         return this;
     };
 
-    this.setRecognizer = function(recognizer) {
+    this.setRecognizer = function (recognizer) {
         obj.recognizer = recognizer;
         return this;
     };
 
-    this.setTimeout = function(timeout) {
+    this.setTimeout = function (timeout) {
         obj.timeout = timeout;
         return this;
     };
 
-    this.setVoice = function(voice) {
+    this.setVoice = function (voice) {
         obj.voice = voice;
         return this;
     };
 
-    this.setInterdigitTimeout = function(idTimeout) {
-        obj.interdigitTimeout = idTimeout;
+    this.setEnterDigitTimeout = function (idTimeout) {
+        obj.EnterDigitTimeout = idTimeout;
         return this;
     };
 
-    this.setSensitivity = function(sensitivity) {
+    this.setSensitivity = function (sensitivity) {
         obj.sensitivity = sensitivity;
         return this;
     };
 
-    this.setSpeechCompleteTimeout = function(scTimeout) {
+    this.setSpeechCompleteTimeout = function (scTimeout) {
         obj.speechCompleteTimeout = scTimeout;
         return this;
     };
 
-    this.setSpeechIncompleteTimeout = function(siTimeout) {
+    this.setSpeechIncompleteTimeout = function (siTimeout) {
         obj.speechIncompleteTimeout = siTimeout;
         return this;
     };
 
-    this.getObject = function() {
-        if(typeof this.choices === 'undefined') {
+    this.getObject = function () {
+        if (typeof this.choices === 'undefined') {
             throw new Error('Choices is required.');
         }
 
-        if(typeof this.say === 'undefined') {
+        if (typeof this.say === 'undefined') {
             throw new Error('Say is required.');
         }
 
-        obj.choices = this.say.event == null ? this.choices : JSON.stringify(this.choices, rmNull);
-        obj.say = this.say.event == null ? this.say : JSON.stringify(this.say, rmNull);
-        
-        for(var key in obj) {
-            if(typeof obj[key] == 'object' && typeof obj[key].getObject == 'function') {
-                obj[key] = obj[key].getObject()
+        obj.choices = this.say.event === null ?
+            this.choices : JSON.stringify(this.choices, rmNull);
+        obj.say = this.say.event === null ?
+            this.say : JSON.stringify(this.say, rmNull);
+
+        for (var key in obj) {
+            if (
+                typeof obj[key] === 'object' &&
+                typeof obj[key].getObject === 'function'
+            ) {
+                obj[key] = obj[key].getObject();
             }
         }
 
         return obj;
     };
 
-    rmNull = function(key, value) {
+    rmNull = function (key, value) {
         if (value === null) {
             return undefined;
         }
 
         return value;
     };
-    
-}
 
-module.exports = function(say) {
+};
+
+module.exports = function (say) {
     return new Ask(say);
-}
+};

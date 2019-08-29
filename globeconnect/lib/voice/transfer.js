@@ -1,106 +1,110 @@
-var Transfer = function(to) {
+var Transfer = function (to) {
     var obj = {};
 
     this.to = to;
 
-    this.setName = function(name) {
+    this.setName = function (name) {
         obj.name = name;
         return this;
-    }
+    };
 
-    this.setAnswerOnMedia = function(ans) {
+    this.setAnswerOnMedia = function (ans) {
         obj.setAnswerOnMedia = ans;
         return this;
     };
 
-    this.setChoices = function(choices) {
+    this.setChoices = function (choices) {
         this.choices = choices;
         return this;
     };
 
-    this.setFrom = function(from) {
+    this.setFrom = function (from) {
         obj.from = from;
         return this;
     };
 
-    this.setHeaders = function(headers) {
+    this.setHeaders = function (headers) {
         this.headers = headers;
         return this;
     };
 
-    this.on = function(on) {
+    this.on = function (on) {
         obj.on = on;
         return this;
     };
 
-    this.required = function(required) {
+    this.required = function (required) {
         obj.required = required;
         return this;
     };
 
-    this.setTerminator = function(terminator) {
+    this.setTerminator = function (terminator) {
         obj.terminator = terminator;
         return this;
     };
 
-    this.setTimeout = function(timeout) {
+    this.setTimeout = function (timeout) {
         obj.timeout = timeout;
         return this;
     };
 
-    this.allowSignals = function(allow) {
+    this.allowSignals = function (allow) {
         obj.allowSignals = allow;
         return this;
     };
 
-    this.setInterdigitTimeout = function(idtimeout) {
-        obj.interdigitTimeout = idtimeout;
+    this.setEnterDigitTimeout = function (idTimeout) {
+        obj.enterDigitTimeout = idTimeout;
         return this;
     };
 
-    this.ringRepeat = function(ringrepeat) {
-        obj.ringRepeat = ringrepeat;
+    this.ringRepeat = function (ringRepeat) {
+        obj.ringRepeat = ringRepeat;
         return this;
     };
 
-    this.setMachineDetection = function(mdetection) {
-        obj.machineDetection = mdetection;
+    this.setMachineDetection = function (mDetection) {
+        obj.machineDetection = mDetection;
         return this;
     };
 
-    this.getObject = function() {
-        if(typeof this.to == 'undefined') {
-            throw new Error('To is requried');
+    this.getObject = function () {
+        if (typeof this.to === 'undefined') {
+            throw new Error('To is required');
         }
-        
-        if(typeof obj.choices != 'undefined') {
+
+        if (typeof obj.choices !== 'undefined') {
             obj.choices = JSON.stringify(this.choices);
         }
 
-        if(typeof obj.headers != 'undefined') {
+        if (typeof obj.headers !== 'undefined') {
             obj.headers = JSON.stringify(this.headers);
         }
 
-        if(typeof obj.on == 'array') {
+        if (Array.isArray(obj.on)) {
             obj.on = obj.on.join(',');
         } else {
-            if(typeof obj.on != 'undefined') {
-                obj.on = typeof obj.on == 'object' ? JSON.stringify(obj.on) : obj.on;
+            if (typeof obj.on !== 'undefined') {
+                obj.on = typeof obj.on === 'object' ?
+                    JSON.stringify(obj.on) : obj.on;
             }
         }
 
         obj.to = this.to;
 
-        for(var key in obj) {
-            if(typeof obj[key] == 'object' && typeof obj[key].getObject == 'function') {
-                obj[key] = obj[key].getObject()
+        for (var key in obj) {
+            if (
+                typeof obj[key] === 'object' &&
+                typeof obj[key].getObject === 'function'
+            ) {
+                obj[key] = obj[key].getObject();
             }
         }
 
         return obj;
-    }
-}
+    };
+};
 
-module.exports = function(to, name) {
+module.exports = function (to, name) {
     return new Transfer(to, name);
-}
+};

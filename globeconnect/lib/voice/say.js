@@ -1,47 +1,50 @@
-var Say = function(value) {
+var Say = function (value) {
     var obj = {};
     this.value = value;
 
-    this.setAs = function(as) {
+    this.setAs = function (as) {
         obj.as = as;
         return this;
     };
 
-    this.setEvent = function(e) {
+    this.setEvent = function (e) {
         obj.event = e;
         return this;
     };
 
-    this.required = function(required) {
+    this.required = function (required) {
         obj.required = required;
         return this;
     };
 
-    this.setVoice = function(voice) {
+    this.setVoice = function (voice) {
         obj.voice = voice;
         return this;
     };
 
-    this.allowSignals = function(allow) {
+    this.allowSignals = function (allow) {
         obj.allowSignals = allow;
         return this;
     };
 
-    this.setName = function(name) {
+    this.setName = function (name) {
         obj.name = name;
         return this;
     };
 
-    this.getObject = function() {
-        if(typeof this.value == 'undefined') {
+    this.getObject = function () {
+        if (typeof this.value === 'undefined') {
             throw new Error('Value is required.');
         }
 
-        if(typeof obj.event != 'array') {
+        if (!Array.isArray(obj.event)) {
             obj.value = this.value;
 
-            for(var key in obj) {
-                if(typeof obj[key] == 'object' && typeof obj[key].getObject == 'function') {
+            for (var key in obj) {
+                if (
+                    typeof obj[key] === 'object' &&
+                    typeof obj[key].getObject === 'function'
+                ) {
                     obj[key] = obj[key].getObject();
                 }
 
@@ -51,8 +54,11 @@ var Say = function(value) {
         }
 
         var say = [];
-        for(var i = 0; i < obj.event.length; i++) {
-            if(typeof obj.event[i] == 'object' && obj.event[i].getObject == 'function') {
+        for (var i = 0; i < obj.event.length; i++) {
+            if (
+                typeof obj.event[i] === 'object' &&
+                obj.event[i].getObject === 'function'
+            ) {
                 say[i] = obj.event[i].getObject();
                 continue;
             }
@@ -60,12 +66,14 @@ var Say = function(value) {
             say[i] = obj.event[i];
         }
 
-        say[obj.event.length] = { value : this.value };
+        say[obj.event.length] = {
+            value: this.value
+        };
         return say;
-    }
+    };
 
 };
 
-module.exports = function(value) {
+module.exports = function (value) {
     return new Say(value);
-}
+};

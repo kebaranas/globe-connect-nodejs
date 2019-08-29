@@ -1,58 +1,58 @@
-var Message = function(say, to) {
+var Message = function (say, to) {
     var obj = {};
     this.say = say;
     this.to = to;
 
-    this.setName = function(name) {
+    this.setName = function (name) {
         this.name = name;
         return this;
     };
 
-    this.answerOnMedia = function(ansMedia) {
+    this.answerOnMedia = function (ansMedia) {
         obj.answerOnMedia = ansMedia;
         return this;
     };
 
-    this.setChannel = function(channel) {
+    this.setChannel = function (channel) {
         obj.channel = channel;
         return this;
     };
 
-    this.from = function(from) {
+    this.from = function (from) {
         obj.from = from;
         return this;
     };
 
-    this.setNetwork = function(network) {
+    this.setNetwork = function (network) {
         obj.network = network;
         return this;
     };
 
-    this.required = function(required) {
+    this.required = function (required) {
         obj.required = required;
         return this;
     };
 
-    this.setTimeout = function(timeout) {
+    this.setTimeout = function (timeout) {
         obj.timeout = timeout;
         return this;
     };
 
-    this.setVoice = function(voice) {
+    this.setVoice = function (voice) {
         obj.voice = voice;
         return this;
     };
 
-    this.getObject = function() {
-        if(typeof this.say == 'undefined') {
+    this.getObject = function () {
+        if (typeof this.say === 'undefined') {
             throw new Error('say is required');
         }
 
-        if(typeof this.to == 'undefined') {
+        if (typeof this.to === 'undefined') {
             throw new Error('to is required');
         }
 
-        if(typeof this.name == 'undefined') {
+        if (typeof this.name === 'undefined') {
             throw new Error('Name is required');
         }
 
@@ -60,9 +60,12 @@ var Message = function(say, to) {
         obj.to = this.to;
         obj.say = this.say;
 
-        for(var key in obj) {
-            if(typeof obj[key] == 'object' && typeof obj[key].getObject == 'function') {
-                obj[key] = obj[key].getObject()
+        for (var key in obj) {
+            if (
+                typeof obj[key] === 'object' &&
+                typeof obj[key].getObject === 'function'
+            ) {
+                obj[key] = obj[key].getObject();
             }
         }
 
@@ -73,6 +76,6 @@ var Message = function(say, to) {
 
 };
 
-module.exports = function(say, to) {
+module.exports = function (say, to) {
     return new Message(say, to);
-}
+};

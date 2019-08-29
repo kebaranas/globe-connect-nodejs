@@ -1,32 +1,35 @@
-var Redirect = function(to) {
+var Redirect = function (to) {
     var obj = {};
     this.to = to;
 
-    this.setName = function(name) {
+    this.setName = function (name) {
         this.name = name;
         return this;
     };
 
-    this.required = function(required) {
+    this.required = function (required) {
         obj.required = required;
         return this;
     };
 
-    this.getObject = function() {
-        if(typeof this.to == 'undefined') {
+    this.getObject = function () {
+        if (typeof this.to === 'undefined') {
             throw new Error('To is required.');
         }
 
-        if(typeof this.name == 'undefined') {
+        if (typeof this.name === 'undefined') {
             throw new Error('Name is required.');
         }
 
         obj.to = this.to;
         obj.name = this.name;
 
-        for(var key in obj) {
-            if(typeof obj[key] == 'object' && typeof obj[key].getObject == 'function') {
-                obj[key] = obj[key].getObject()
+        for (var key in obj) {
+            if (
+                typeof obj[key] === 'object' &&
+                typeof obj[key].getObject === 'function'
+            ) {
+                obj[key] = obj[key].getObject();
             }
         }
 
@@ -36,6 +39,6 @@ var Redirect = function(to) {
     return this;
 };
 
-module.exports = function(to) {
+module.exports = function (to) {
     return new Redirect(to);
-}
+};
