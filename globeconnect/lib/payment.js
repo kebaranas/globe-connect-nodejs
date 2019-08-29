@@ -30,7 +30,7 @@ var Payment = function(token) {
         // store address to this
         this.address = address;
         return this;
-    }
+    };
 
     /*
     * amount setter
@@ -42,7 +42,7 @@ var Payment = function(token) {
         // store amount to this
         this.amount = amount;
         return this;
-    }
+    };
 
     /*
     * description setter
@@ -54,7 +54,7 @@ var Payment = function(token) {
         // store desc to this
         this.desc = desc;
         return this;
-    }
+    };
     
     /*
     * reference code setter
@@ -66,7 +66,7 @@ var Payment = function(token) {
         // store refCode to this
         this.refCode = refCode;
         return this;
-    }
+    };
 
     /*
     * status setter
@@ -78,7 +78,7 @@ var Payment = function(token) {
         // store status to this
         this.status = status;
         return this;
-    }
+    };
 
     /*
     * app key setter
@@ -90,7 +90,7 @@ var Payment = function(token) {
         // store appKey to this
         this.key = appKey;
         return this;
-    }
+    };
 
     /*
     * app secret setter
@@ -100,9 +100,9 @@ var Payment = function(token) {
     */
     this.setAppSecret = function(secret) {
         // store secret to this
-        this.secret;
+        this.secret = secret;
         return this;
-    }
+    };
 
     /*
     * get last reference code
@@ -129,7 +129,7 @@ var Payment = function(token) {
             // call callback function
             callback(resCode, body);
         });
-    }
+    };
 
     /*
     * send payment request
@@ -151,7 +151,7 @@ var Payment = function(token) {
         // http_build_query
         payload = qs.toString(payload);
         
-        // intialize curl
+        // initialize curl
         var curl = new Curl();
         // set request url
         curl.setOpt(curl.option.URL, url);
@@ -168,16 +168,16 @@ var Payment = function(token) {
             this.close();
             // call callback function
             callback(resCode, body);
-        })
-    }
+        });
+    };
     
     // return Object Payment
     return this;
 
-}
+};
 
 // module exports
 module.exports = function(token) {
     // return Payment Object
     return new Payment(token);
-}
+};

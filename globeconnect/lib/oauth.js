@@ -11,7 +11,7 @@ var Oauth = function(key, secret) {
     this.key = key;
     // store secret to this
     this.secret = secret;
-    // intialize variables
+    // initialize variables
     this.code = null;
 
     /*
@@ -20,7 +20,7 @@ var Oauth = function(key, secret) {
     * @return   string  url auth url
     */
     this.getRedirectUrl = function() {
-        // reutrn url
+        // return url
         return SUBS_URL.replace('[key]', this.key);
     };
     
@@ -42,7 +42,7 @@ var Oauth = function(key, secret) {
         curl.setOpt(Curl.option.URL, url);
         // set request as post
         curl.setOpt(Curl.option.POST, true);
-        // dont verify ssl certificate
+        // don't verify ssl certificate
         curl.setOpt(Curl.option.SSL_VERIFYPEER, false);
         curl.setOpt(Curl.option.SSL_VERIFYHOST, false);
         // perform curl
@@ -56,14 +56,14 @@ var Oauth = function(key, secret) {
             callback(resCode, body);
         });
 
-    }
+    };
     
     // return Oauth Object
     return this;
-}
+};
 
 // module export
 module.exports = function(key, secret) {
     // return Oauth Object
     return new Oauth(key, secret);
-}
+};

@@ -12,7 +12,7 @@ var Ussd = function(token, shortCode) {
     // store shortCode to this
     this.shortCode = shortCode;
     
-    // intialize variables
+    // initialize variables
     this.address = null;
     this.flash = false;
     this.msg = null;
@@ -74,7 +74,7 @@ var Ussd = function(token, shortCode) {
     */
     this.sendUssdRequest = function(callback) {
         // prepare request url
-        var url = SEND_USSD.replace('[shortcode]', this.shortCode)
+        var url = SEND_USSD.replace('[shortCode]', this.shortCode)
             .replace('[token]', this.token);
 
         // prepare request payload
@@ -84,10 +84,10 @@ var Ussd = function(token, shortCode) {
                     message : this.msg
                 },
                 address : this.address,
-                senderAddress : this.shortcode,
+                senderAddress : this.shortCode,
                 flash : this.flash }};
         
-        // intialize curl
+        // initialize curl
         var curl = new Curl();
         // set request url
         curl.setOpt(curl.option.URL, url);
@@ -117,7 +117,7 @@ var Ussd = function(token, shortCode) {
     */
     this.replyUssdRequest = function(callback) {
         // prepare request url
-        var url = REPLY_USSD.replace('[shortcode]', this.shortCode)
+        var url = REPLY_USSD.replace('[shortCode]', this.shortCode)
             .replace('[token]', this.token);
         
         // prepare request payload
@@ -126,11 +126,11 @@ var Ussd = function(token, shortCode) {
                 outboundUSSDMessage : {
                     message : this.msg},
                 address : this.address,
-                senderAddress : this.shortcode,
+                senderAddress : this.shortCode,
                 sessionID : this.session,
                 flash : this.flash }};
 
-        // intialize curl
+        // initialize curl
         var curl = new Curl();
         // set request url
         curl.setOpt(curl.option.URL, url);

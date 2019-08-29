@@ -38,7 +38,7 @@ var Amax = function(key, secret) {
         // store token to this
         this.token = token;
         return this;
-    }
+    };
 
     /*
     * promo setter
@@ -50,7 +50,7 @@ var Amax = function(key, secret) {
         // store promo to this
         this.promo = promo;
         return this;
-    }
+    };
     
     /*
     * send reward
@@ -69,7 +69,7 @@ var Amax = function(key, secret) {
                 "app_secret" : this.secret,
                 "rewards_token" : this.token,
                 "address" : this.address,
-                "promo" : this.promo } }
+                "promo" : this.promo } };
         
         // initialize curl
         var curl = new Curl();
@@ -78,9 +78,9 @@ var Amax = function(key, secret) {
         // set request as post
         curl.setOpt(Curl.option.POST, true);
         // set json header request
-        curl.setOpt(Curl.option.HTTPHEADER, ['Content-type: application/json'])
+        curl.setOpt(Curl.option.HTTPHEADER, ['Content-type: application/json']);
         // set request payload
-        curl.setOpt(Curl.option.POSTFIELDS, JSON.stringify(payload))
+        curl.setOpt(Curl.option.POSTFIELDS, JSON.stringify(payload));
         // perform curl
         curl.perform();
         
@@ -91,14 +91,14 @@ var Amax = function(key, secret) {
             // call callback function
             callback(resCode, body);
         });
-    }
+    };
     
     // return Amax Object
     return this;
-}
+};
 
 // module export
 module.exports = function(key, secret) {
     // return Amax Object
-    return new Amax(key, secret)
-}
+    return new Amax(key, secret);
+};

@@ -70,7 +70,7 @@ var Sms = function(sender, token) {
     /*
     * encoding setter
     *
-    * @param    string  endcoding       data encoding scheme
+    * @param    string  encoding       data encoding scheme
     * @return   object  this
     */
     this.setDataEncodingScheme = function(encoding) {
@@ -104,9 +104,9 @@ var Sms = function(sender, token) {
         // set request as post
         curl.setOpt(Curl.option.POST, true);
         // set json request header
-        curl.setOpt(Curl.option.HTTPHEADER, ['Content-type: application/json'])
+        curl.setOpt(Curl.option.HTTPHEADER, ['Content-type: application/json']);
         // set payload
-        curl.setOpt(Curl.option.POSTFIELDS, JSON.stringify(payload))
+        curl.setOpt(Curl.option.POSTFIELDS, JSON.stringify(payload));
         // perform curl
         curl.perform();
         
@@ -149,9 +149,9 @@ var Sms = function(sender, token) {
         // set request as post
         curl.setOpt(Curl.option.POST, true);
         // set json request header
-        curl.setOpt(Curl.option.HTTPHEADER, ['Content-type: application/json'])
+        curl.setOpt(Curl.option.HTTPHEADER, ['Content-type: application/json']);
         // set request payload
-        curl.setOpt(Curl.option.POSTFIELDS, JSON.stringify(payload))
+        curl.setOpt(Curl.option.POSTFIELDS, JSON.stringify(payload));
         // perform curl
         curl.perform();
         
@@ -167,10 +167,10 @@ var Sms = function(sender, token) {
     
     // return Sms object
     return this;
-}
+};
 
 // module export
 module.exports = function(sender, token) {
     // export Sms object
-    return new Sms(sender, token)
-}
+    return new Sms(sender, token);
+};

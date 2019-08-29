@@ -7,4 +7,4 @@ module.exports = {
     Subscriber : require('./lib/subscriber.js'),
     Ussd : require('./lib/ussd.js'),
     Voice : require('./lib/voice.js')
-}
+};
